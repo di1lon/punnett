@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+
+  
+  
+
+  
+  
+  
+
+  
+
+  <script type="text/javascript" src="//code.jquery.com/jquery-2.1.3.js"></script>
+
+  
+
+  
+
+  
+
+  
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+  
+
+  
+
+  <style type="text/css">
+    #parents {
+    background-color:#e1e1e1;
+    clear:both;
+    height:80px;
+}
+.fish {
+    width:50px;
+    height:50px;
+    float:left;
+    margin:4px;
+}
+.aa {
+    background-color:blue;
+}
+.Aa {
+    background-color:purple;
+}
+.aA {
+    background-color:purple;
+}
+.AA {
+    background-color:red;
+}
+.bb {
+    border-radius:0px;
+}
+.BB {
+    border-radius:10px;
+}
+.bB {
+    border-radius:40px;
+}
+.Bb {
+    border-radius:40px;
+}
+.cc {
+    opacity:0.5
+}
+;
+ .cC {
+}
+;
+ .CC {
+}
+;
+ .Cc {
+}
+;
+  </style>
+
+  <title>punnett genomics by di1lon</title>
+
+  
+    
+
+
+
+
+<script type='text/javascript'>//<![CDATA[
+$(window).load(function(){
+function Fish() {
+		//create one parent
+    this.colorGene = getAlleles(color);
+    this.sizeGene = getAlleles(size);
+    this.shapeGene = getAlleles(shape);
+    var code = this.colorGene.join("");
+    var code2 = this.sizeGene.join("");
+    var code3 = this.shapeGene.join("");
+    this.phenotype = $("<div class=\"fish " + code + " " + code2 + " " + code3 + "\"></div>");
+    //$(this.phenotype).data("color",this.colorGene);
+    $(this.phenotype).click(function () {
+        alert(code + code2 + code3);
+    });
+
+}
+
+var color = new Array("A", "a");
+var shape = new Array("B", "b");
+var size = new Array("C", "c");
+
+
+function getAlleles(alleles) {
+
+    var gene = new Array();
+    var allele1 = alleles[Math.floor(Math.random() * alleles.length)];
+    gene[0] = allele1;
+    var allele2 = alleles[Math.floor(Math.random() * alleles.length)];
+    gene[1] = allele2;
+    return gene;
+}
+
+
+function mate(parent1, parent2) {
+		//mate parents and generate one offspring
+    var colorGene = miosis("colorGene", parent1, parent2);
+    var sizeGene = miosis("sizeGene", parent1, parent2);
+    var shapeGene = miosis("shapeGene", parent1, parent2);
+
+    var color = colorGene.join("");
+    var size = sizeGene.join("");
+    var shape = shapeGene.join("");
+    //alert(color);    
+
+    var creature = new Fish();
+    creature.colorGene = colorGene;
+    creature.sizeGene = sizeGene;
+    creature.shapeGene = shapeGene;
+    creature.phenotype = $("<div class=\"fish " + color + " " + size + " " + shape + "\"></div>");
+    $(creature.phenotype).data("color", colorGene);
+    $(creature.phenotype).click(function () {
+        alert(color + size + shape);
+    });
+    $(creature.phenotype).appendTo("#pond");
+
+
+
+}
+
+
+function miosis(gene, parent1, parent2) {
+
+    //define gene variables to make function cleaner
+    var gene1 = parent1[gene];
+    var gene2 = parent2[gene];
+    //alert(gene1 + gene2);
+
+    //create the punnett square using these 2 genes
+    var outcomes = []
+    var outcome1 = [gene1[0], gene2[0]];
+    outcomes.push(outcome1);
+    var outcome2 = [gene1[0], gene2[1]];
+    outcomes.push(outcome2);
+    var outcome3 = [gene1[1], gene2[0]];
+    outcomes.push(outcome3);
+    var outcome4 = [gene1[1], gene2[1]];
+    outcomes.push(outcome4);
+    //alert(outcomes.toString());
+
+    //select one outcome at random
+    var newGeneArray = outcomes[Math.floor(Math.random() * outcomes.length)];
+    return newGeneArray;
+}
+
+
+var shark1 = new Fish();
+$(shark1.phenotype).appendTo("#parents");
+var shark2 = new Fish();
+$(shark2.phenotype).appendTo("#parents");
+
+
+
+for (i = 0; i < 50; i++) {
+    mate(shark1, shark2);
+}
+});//]]> 
+
+</script>
+
+  
+</head>
+
+<body>
+  <div id="pond">
+    <div id="parents"></div>
+</div>
+  
+  <script>
+  // tell the embed parent frame the height of the content
+  if (window.parent && window.parent.parent){
+    window.parent.parent.postMessage(["resultsFrame", {
+      height: document.body.getBoundingClientRect().height,
+      slug: "c59b54s0"
+    }], "*")
+  }
+</script>
+
+</body>
+
+</html>
+
